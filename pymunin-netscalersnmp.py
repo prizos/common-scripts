@@ -44,7 +44,7 @@ __email__ = "petros.rizos@gmail.com"
 __status__ = "Development"
 
 
-class MuninTomcatPlugin(MuninPlugin):
+class MuninNetscalerPlugin(MuninPlugin):
     """Multigraph Munin Plugin for monitoring Netscaler snmp.
 
     """
@@ -61,9 +61,7 @@ class MuninTomcatPlugin(MuninPlugin):
         """
         MuninPlugin.__init__(self, argv, env, debug)
         
-        self.envRegisterFilter('ports', '^\d+$')
-        
-        self._host = self.envGet('host')
+        self._host = self.envGet('hostname')
         self._community = self.envGet('community')
         self._name_full = []
         self._data_full = []
@@ -99,7 +97,7 @@ class MuninTomcatPlugin(MuninPlugin):
             except:
                 pass
             self.appendGraph('multicast_pkts', graph)
-#          
+          
         #Start of Unicast graphing
         if self.graphEnabled('unicast_pkts'):
             graph = MuninGraph('Unicast packets', 'Netscaler',
@@ -394,7 +392,7 @@ class MuninTomcatPlugin(MuninPlugin):
 
 
 def main():
-    sys.exit(muninMain(MuninTomcatPlugin))
+    sys.exit(muninMain(MuninNetscalerPlugin))
 
 
 if __name__ == "__main__":
