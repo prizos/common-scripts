@@ -2,13 +2,17 @@
 """pyvoyager - Munin Plugin to monitor voyager servers
 
 Requirements
-  - A working snmp for the voyager stats
+  - A working webpage for the voyager stats
     
 Wild Card Plugin - No
 
 
 Multigraph Plugin - Graph Structure
-   - All SNMP data
+   - multicast_pkts
+   - unicast_pkts
+   - total_octets
+   - nsHttpStatsGroup
+   - vserverTable
 
    
 Environment Variables
@@ -147,11 +151,15 @@ class MuninVoyagerPlugin(MuninPlugin):
         
         #Hacked correction due to bad SNMP data from voyager
         for index in self.my_range(0,3,1):
-            dic['protocol_name'].pop(index)
-            dic['variable_name'].pop(index)
-            dic['variable_type'].pop(index)
-            dic['variable_data'].pop(index)
+            dic['protocol_name'].pop(0)
+            dic['variable_name'].pop(0)
+            dic['variable_type'].pop(0)
+            dic['variable_data'].pop(0)
 
+  dic['protocol_name'].pop()
+        dic['variable_name'].pop()
+        dic['variable_type'].pop()
+        dic['variable_data'].pop()
             
         return dic
 
